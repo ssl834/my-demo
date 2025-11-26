@@ -1,12 +1,15 @@
-FROM registry.cn-shanghai.aliyuncs.com/zl_public/dd:3.6.3-ajdk-8 
+FROM registry.cn-shanghai.aliyuncs.com/zl_public/dd:3.6.3-ajdk-8  as BUILDER
 WORKDIR /app
 COPY . .
-RUN ls -ll
 # 设置工作目录
 RUN cp -f settings.xml /opt/taobao/install/apache-maven-3.6.3/conf/settings.xml
 RUN mvn clean package
 # 复制 jar 包到容器内
 COPY ./target/my-demo-0.0.1-SNAPSHOT.jar app.jar
+
+FROM openjdk:8u342
+WORKDIR /app
+COPY --from=BUILDER /app/app.jar app.jar
 
 # 暴露应用端口（根据你的 Spring Boot 端口修改，比如 8080）
 EXPOSE 8080
