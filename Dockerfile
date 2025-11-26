@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN ls -ll
 # 设置工作目录
-RUN cp -f settings.xml /usr/share/maven/conf/settings.xml
+RUN cp -f settings.xml /opt/taobao/install/apache-maven-3.6.3/conf/settings.xml
 RUN mvn clean package
 # 复制 jar 包到容器内
 COPY ./target/my-demo-0.0.1-SNAPSHOT.jar app.jar
