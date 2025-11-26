@@ -1,4 +1,4 @@
-FROM openjdk:8u342
+FROM registry.cn-shanghai.aliyuncs.com/zl_public/dd:3.6.3-ajdk-8 
 # 设置工作目录
 WORKDIR /app
 RUN mvn clean package
