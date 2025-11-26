@@ -1,7 +1,7 @@
 FROM openjdk:8u342
 # 设置工作目录
 WORKDIR /app
-RUN mvn clean package
+RUN mvn clean package  -DoutputDirectory=./target/
 # 复制 jar 包到容器内
 COPY ./target/my-demo-0.0.1-SNAPSHOT.jar app.jar
 
